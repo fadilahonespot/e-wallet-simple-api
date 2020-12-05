@@ -43,7 +43,7 @@ localhost:8090/account/{{account_number}}
 ```endpoint
 localhost:8090/transfer
 ```
-` Request header
+- Request header
 ```header
 customer_number = 1001
 ```
