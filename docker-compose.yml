@@ -1,0 +1,32 @@
+version: "3.2"
+services:
+    postgres:
+        image: postgres:alpine
+        environment:
+        - POSTGRES_DB=ewallet
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=pas12345
+        ports:
+        - 5432:5432
+        restart: always
+        networks: [ "go_develop" ]
+
+    server:
+        build: .
+        environment: 
+          - POSTGRES_DB=ewallet
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=pas12345
+          - POSTGRES_HOST=postgres
+          - PORT=8090
+        depends_on:
+        - postgres
+        ports:
+        - "8090:8090"
+        - "80:80"
+        restart: always
+        networks: [ "go_develop" ]
+
+networks:
+    go_develop:
+        driver: bridge
