@@ -28,7 +28,7 @@ project as a medium for learning to build a simple API with dokerizer and unit t
 ```run
  $~ make unit-test
 ```
-- Clean project in docker
+- Remove project in docker
 ```run
  $~ make clean
 ```
