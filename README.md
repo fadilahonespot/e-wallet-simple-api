@@ -14,7 +14,7 @@ project as a medium for learning to build a simple API with dokerizer and unit t
 ```run
  $~ go run main.go
 ```
-### Using Makefile
+### Using Makefile Command
 - Deploy project in docker
 ```run
  $~ make deploy
