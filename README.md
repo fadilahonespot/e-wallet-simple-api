@@ -14,6 +14,23 @@ project as a medium for learning to build a simple API with dokerizer and unit t
 ```run
  $~ go run main.go
 ```
+### Using Makefile
+- Deploy project in docker
+```run
+ $~ make deploy
+```
+- Integration test
+```run
+ $~ make integration-test
+```
+- Unit test
+```run
+ $~ make unit-test
+```
+- Clean project in docker
+```run
+ $~ make clean
+```
 ## Endpoint
 ### Add User Method POST
 - Url
