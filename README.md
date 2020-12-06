@@ -10,7 +10,6 @@ project as a medium for learning to build a simple API with dokerizer and unit t
 ```
 ### Without Docker
 - Setting database in .env file
-- Import file database.sql to postgres
 - Run project in terminal
 ```run
  $~ go run main.go
