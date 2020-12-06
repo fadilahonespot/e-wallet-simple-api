@@ -14,11 +14,11 @@ services:
     server:
         build: .
         environment: 
-          - POSTGRES_DB=ewallet
-          - POSTGRES_USER=postgres
-          - POSTGRES_PASSWORD=pas12345
-          - POSTGRES_HOST=postgres
-          - PORT=8090
+        - POSTGRES_DB=ewallet
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=pas12345
+        - POSTGRES_HOST=postgres
+        - PORT=8090
         depends_on:
         - postgres
         ports:

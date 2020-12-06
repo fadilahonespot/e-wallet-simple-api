@@ -33,7 +33,6 @@ func loadSqlFile(db *sql.DB) {
     if err != nil {
         fmt.Println(err.Error())
     }
-	fmt.Println("Sudah masuk db load")
 
     // Execute all
     _, err = db.Exec(string(file))
