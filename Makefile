@@ -1,4 +1,4 @@
-.PHONY: dependency unit-test integration-test docker-up docker-down deploy clean docker-remove-image server-logs
+.PHONY: dependency unit-test integration-test docker-up docker-down deploy clean docker-remove-image logs
 
 dependency:
 	@go get -v ./...
