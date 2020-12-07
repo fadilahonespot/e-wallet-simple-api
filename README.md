@@ -62,7 +62,7 @@ localhost:8090/transfer
 ```
 - Request header
 ```header
-customer_number = {{customer_number}}
+account_number = {{account_number}}
 ```
 - Request body
 ```body
