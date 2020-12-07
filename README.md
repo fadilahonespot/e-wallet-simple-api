@@ -4,17 +4,7 @@ project as a medium for learning to build a simple API with dokerizer and unit t
 ## Go Version
 - 1.5
 ## Installation
-### Using Docker
-```docker
- $~ docker-compose up --build -d
-```
-### Without Docker
-- Setting database in .env file
-- Run project in terminal
-```run
- $~ go run main.go
-```
-### Using Makefile
+### Using Makefile Command
 - Deploy project in docker
 ```run
  $~ make deploy
@@ -27,9 +17,20 @@ project as a medium for learning to build a simple API with dokerizer and unit t
 ```run
  $~ make unit-test
 ```
-- Clean project in docker
+- Remove project in docker
 ```run
  $~ make clean
+```
+### Using Docker Command
+```docker
+ $~ docker-compose up --build -d
+```
+### Without Docker
+- Setting database in .env file
+- Using postgres database
+- Run project in terminal
+```run
+ $~ go run main.go
 ```
 ## Endpoint
 ### Add User Method POST
