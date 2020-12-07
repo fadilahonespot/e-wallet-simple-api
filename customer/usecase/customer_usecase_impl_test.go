@@ -2,11 +2,12 @@ package usecase_test
 
 import (
 	"e-wallet-simple-api/customer/mocks"
-	"e-wallet-simple-api/model"
 	usecase "e-wallet-simple-api/customer/usecase"
+	"e-wallet-simple-api/model"
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
+	"github.com/stretchr/testify/assert"
 )
 
 var mockAccount = model.Account{
@@ -23,24 +24,17 @@ func TestCostomerUsecaseImpl_FindCustomerByID(t *testing.T) {
 
 		customerUsecase := usecase.CreateCustomerUsecase(mockAccountRepo)
 		res, err := customerUsecase.FindCustomerByID(mockAccount.AccountNumber)
-		if res == nil {
-			t.Fatalf("should return data but return nil")
-		}
-		if res.AccountNumber != mockAccount.AccountNumber {
-			t.Fatalf("Account ID should return %v, got %v", mockAccount.AccountNumber, res.AccountNumber)
-		}
-		if err != nil {
-			t.Fatalf("error return nil, got %v", err)
-		}
+		
+		assert.NotNil(t, res)
+		assert.Equal(t, mockAccount.AccountNumber, res.AccountNumber)
+		assert.Nil(t, err)
 	})
 }
 
 func TestCustomerUsecaseImpl_InsertCustomer(t *testing.T) {
 	t.Run("Test Normal Case", func(t *testing.T) {
 		db, mockSql, err := sqlmock.New()
-		if err != nil {
-			t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
-		}
+		assert.Nil(t, err)
 		defer db.Close()
 		mockSql.ExpectBegin()
 
@@ -50,9 +44,7 @@ func TestCustomerUsecaseImpl_InsertCustomer(t *testing.T) {
 		u := usecase.CreateCustomerUsecase(mockAccoundRepo)
 		isSucces := u.InsertCustomer(&mockAccount)
 
-		if isSucces != true {
-			t.Errorf("Error should be false, but get %v", isSucces)
-		}
+		assert.Equal(t, true, isSucces)
 	})
 }
 
@@ -64,9 +56,8 @@ func TestCustomerUsecaseImpl_CheckAccoutExist(t *testing.T) {
 
 		customerUsecase := usecase.CreateCustomerUsecase(mockAccountRepo)
 		isExist := customerUsecase.CheckAccoutExist(mockAccount.AccountNumber)
-		if isExist != true {
-			t.Errorf("Error should be false, but get %v", isExist)
-		}
+		
+		assert.Equal(t, true, isExist)
 	})
 }
 
@@ -78,9 +69,8 @@ func TestCustomerUsecaseImpl_CheckCustomerExist(t *testing.T) {
 
 		customerUsecase := usecase.CreateCustomerUsecase(mockAccountRepo)
 		isExist := customerUsecase.CheckCustomerExist(customerNumber)
-		if isExist != true {
-			t.Errorf("Error should be false, but get %v", isExist)
-		}
+		
+		assert.Equal(t, true, isExist)
 	})
 }
 
@@ -88,7 +78,7 @@ func TestCustomerUsecaseImpl_TransferBalance(t *testing.T) {
 	t.Run("Test Normal Case", func(t *testing.T) {
 		mockAccountRepo := new(mocks.CustomerRepoMock)
 		var balance = model.Transfer{
-			CostomerNumber:  "10004",
+			MyAccountNumber: "10004",
 			ToAccountNumber: mockAccount.AccountNumber,
 			Amount:          mockAccount.Balance,
 		}
@@ -96,9 +86,8 @@ func TestCustomerUsecaseImpl_TransferBalance(t *testing.T) {
 
 		customerUsecase := usecase.CreateCustomerUsecase(mockAccountRepo)
 		isSucces := customerUsecase.TransferBalance(&balance)
-		if isSucces != true {
-			t.Errorf("Error should be false, but get %v", isSucces)
-		}
+		
+		assert.Equal(t, true, isSucces)
 	})
 }
 
@@ -112,14 +101,9 @@ func TestCustomerUsecaseImpl_FindCustomers(t *testing.T) {
 
 		customerUsecase := usecase.CreateCustomerUsecase(mockAccountRepo)
 		res, err := customerUsecase.FindCustomers()
-		if res == nil {
-			t.Fatalf("should return data but return nil")
-		}
-		if len(*res) != len(mockAccounds) {
-			t.Fatalf("Len should return %v, got %v", len(mockAccounds), len(*res))
-		}
-		if err != nil {
-			t.Fatalf("error return nil, got %v", err)
-		}
+
+		assert.NotNil(t, res)
+		assert.Equal(t, len(mockAccounds), len(*res))
+		assert.Nil(t, err)
 	})
-} 
+}

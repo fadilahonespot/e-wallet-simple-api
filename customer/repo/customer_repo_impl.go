@@ -116,7 +116,7 @@ func (e *CustomerRepoImpl) CheckCustomerExist(customerNumber string) bool {
 
 func (e *CustomerRepoImpl) TransferBalance(balance *model.Transfer) bool {
 	sql := "SELECT * FROM transfer_balance($1, $2, $3)"
-	res, err := e.db.Query(sql, balance.CostomerNumber, balance.ToAccountNumber, balance.Amount)
+	res, err := e.db.Query(sql, balance.MyAccountNumber, balance.ToAccountNumber, balance.Amount)
 	if err != nil {
 		fmt.Printf("[CustomerRepoImpl.TransferBalance] error execute query %v \n", err)
 		return false

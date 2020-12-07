@@ -119,14 +119,14 @@ func TestCustomerhandler_insertCustomer(t *testing.T) {
 func TestCustomerHandler_tranferBalance(t *testing.T) {
 	t.Run("Test Normal Case", func(t *testing.T) {
 
-		var customerNumber = "10002"
+		var myAccountNumber = "10002"
 		var body = model.Transfer{
 			ToAccountNumber: mockAccount.AccountNumber,
 			Amount:          mockAccount.Balance,
 		}
 
 		AccountMockUsecase := new(mocks.CustomerUsecaseMock)
-		AccountMockUsecase.On("CheckCustomerExist", mock.AnythingOfType("string")).Return(nil)
+		AccountMockUsecase.On("CheckAccoutExist", mock.AnythingOfType("string")).Return(nil)
 		AccountMockUsecase.On("CheckAccoutExist", mock.AnythingOfType("string")).Return(nil)
 		AccountMockUsecase.On("TransferBalance", mock.AnythingOfType("*model.Transfer")).Return(nil)
 
@@ -138,7 +138,7 @@ func TestCustomerHandler_tranferBalance(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Error when creating request %v ", err)
 		}
-		req.Header.Set(constant.CustomerNumber, customerNumber)
+		req.Header.Set(constant.AccountNumber, myAccountNumber)
 
 		resp := httptest.NewRecorder()
 		router := gin.Default()

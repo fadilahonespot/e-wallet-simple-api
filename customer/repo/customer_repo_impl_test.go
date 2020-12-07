@@ -131,14 +131,14 @@ func TestCustomerImpl_TransferBalance(t *testing.T) {
 	db, mock := NewMock()
 
 	var b = model.Transfer{
-		CostomerNumber:  "1001",
+		MyAccountNumber:  "1001",
 		ToAccountNumber: u.AccountNumber,
 		Amount:          u.Balance,
 	}
 	rows := sqlmock.NewRows([]string{"isValid"}).
 		AddRow("true")
 	query := "SELECT * FROM transfer_balance($1, $2, $3)"
-	mock.ExpectQuery(query).WithArgs(b.CostomerNumber, b.ToAccountNumber, b.Amount).WillReturnRows(rows)
+	mock.ExpectQuery(query).WithArgs(b.MyAccountNumber, b.ToAccountNumber, b.Amount).WillReturnRows(rows)
 	defer db.Close()
 
 	repo := customerRepoTest.CreateCustomerRepo(db)

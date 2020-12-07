@@ -74,7 +74,7 @@ func (e *CustomerHandler) GetAccounts(c *gin.Context) {
 }
 
 func (e *CustomerHandler) transferBalance(c *gin.Context) {
-	customerNumber := c.GetHeader(constant.CustomerNumber)
+	myAccountNumber := c.GetHeader(constant.AccountNumber)
 	var account model.Transfer
 	err := c.Bind(&account)
 	if err != nil {
@@ -82,17 +82,17 @@ func (e *CustomerHandler) transferBalance(c *gin.Context) {
 		utils.HandleError(c, http.StatusInternalServerError, constant.ServerHasWrong)
 		return
 	}
-	isExist := e.customerUsecase.CheckCustomerExist(customerNumber)
+	isExist := e.customerUsecase.CheckAccoutExist(myAccountNumber)
 	if !isExist {
-		utils.HandleError(c, http.StatusNotFound, constant.CostomerNotFound)
+		utils.HandleError(c, http.StatusNotFound, constant.AccountNumberNotFound)
 		return
 	}
 	isValid := e.customerUsecase.CheckAccoutExist(account.ToAccountNumber)
 	if !isValid {
-		utils.HandleError(c, http.StatusNotFound, constant.AccountNumberNotFound)
+		utils.HandleError(c, http.StatusNotFound, constant.AccountNumberTrasferNotFound)
 		return
 	}
-	account.CostomerNumber = customerNumber
+	account.MyAccountNumber = myAccountNumber
 	isSucces := e.customerUsecase.TransferBalance(&account)
 	if !isSucces {
 		utils.HandleError(c, http.StatusBadRequest, constant.InsufficientBalance)

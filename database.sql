@@ -105,7 +105,7 @@ DECLARE usrid INT;
     end;
 $$;
 
-create function transfer_balance(customer_number_param character varying, to_account_number_param character varying, amount_param numeric) returns boolean
+create function transfer_balance(my_account_number_param character varying, to_account_number_param character varying, amount_param numeric) returns boolean
     language plpgsql
 as
 $$
@@ -116,12 +116,12 @@ DECLARE
         SELECT balance
         INTO bln
         FROM account as a
-        WHERE a.customer_number = customer_number_param;
+        WHERE a.account_number = my_account_number_param;
 
         IF bln >= amount_param THEN
             UPDATE account as d
                 SET balance = bln - amount_param
-            WHERE d.customer_number = customer_number_param;
+            WHERE d.account_number = my_account_number_param;
             
             SELECT b.balance
                 INTO bln2

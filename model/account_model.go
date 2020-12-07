@@ -7,7 +7,7 @@ type Account struct {
 }
 
 type Transfer struct {
-	CostomerNumber  string `json:"my_account_number"`
+	MyAccountNumber string `json:"my_account_number"`
 	ToAccountNumber string `json:"to_account_number"`
 	Amount          int    `json:"amount"`
 }

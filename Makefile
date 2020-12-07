@@ -1,4 +1,4 @@
-.PHONY: dependency unit-test integration-test docker-up docker-down clean
+.PHONY: dependency unit-test integration-test docker-up docker-down deploy clean docker-remove-image server-logs
 
 dependency:
 	@go get -v ./...
@@ -15,6 +15,16 @@ docker-up:
 docker-down:
 	@docker-compose down
 
-clean: docker-down
+docker-remove-image:
+	@docker rmi e-wallet-simple-api_server
+	@docker volume rm e-wallet-simple-api_postgres
+	@docker volume rm e-wallet-simple-api_go
+
+logs:
+	@docker-compose logs -f server
+
+deploy: docker-up
+
+clean: docker-down docker-remove-image
 
   
