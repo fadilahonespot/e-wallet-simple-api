@@ -4,7 +4,7 @@ project as a learning tool to build a simple API with dokerizer and unit testing
 ## Go Version
 - 1.5
 ## Installation
-### Using Makefile Command
+### Using Make Command
 - Deploy project in docker
 ```run
  $~ make deploy
