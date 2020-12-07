@@ -1,5 +1,5 @@
 # E-Wallet Simple Api
-project as a medium for learning to build a simple API with dokerizer and unit testing
+project as a learning tool to build a simple API with dokerizer and unit testing
 
 ## Go Version
 - 1.5
