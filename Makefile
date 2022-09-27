@@ -9,6 +9,17 @@ integration-test: docker-up dependency
 unit-test: dependency
 	@go test -v -short ./...
 
+coverage-test: dependency
+	@echo "=================================================================================="
+	@echo "Coverage Test"
+	@echo "=================================================================================="
+	go test -v -coverprofile coverage.cov ./...
+	@echo "\n"
+	@echo "=================================================================================="
+	@echo "All Package Coverage"
+	@echo "=================================================================================="
+	go tool cover -func coverage.cov
+
 docker-up:
 	@docker-compose up -d
 
